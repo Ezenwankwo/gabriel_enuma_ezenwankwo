@@ -1,0 +1,13 @@
+arrow==0.12.0
+dj-database-url==0.4.2
+Django==1.11.7
+django-bootstrap==0.2.4
+django-bootstrap-form==3.3
+django-bootstrap3==9.1.0
+gunicorn==19.7.1
+psycopg2==2.7.3.2
+python-dateutil==2.6.1
+pytz==2017.3
+social-auth-app-django==2.0.0
+social-auth-core==1.5.0
+whitenoise==3.3.1
