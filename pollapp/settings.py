@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
 
-    'django_filters',
     'social_django',
     'bootstrap3',
     'bootstrapform',
