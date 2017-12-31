@@ -1,0 +1,24 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 50px; margin-top: 50px;" class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h1>Login</h1>
+			<ul class="list-inline">
+				<li class="list-inline-item"><a href="{% url 'social:begin' 'facebook' %}">Facebook</a></li>
+				<li class="list-inline-item"><a href="{% url 'social:begin' 'twitter' %}">Twitter</a></li>
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 20px;">
+				<h3 style="margin: 10px; text-align: center;">About</h3>
+				{% load static %}
+				<img style="margin:auto;" src="{% static 'img/pollit_logo.png' %}" width="300">
+				<p>You can capture any type of data you want with online surveys. But did you know that you can also have some seasonal fun by creating and circulating a Christmas Quiz for all your friends and colleagues to take part in? In the build-up to the big day, why not get everybody in the mood for the holidays by taking part in a bit of festive merriment?
+				You can capture any type of data you want with online surveys. But did you know that you can also have some seasonal fun by creating and circulating a Christmas Quiz for all your friends and colleagues to take part in? In the build-up to the big day, why not get everybody in the mood for the holidays by taking part in a bit of festive merriment?</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

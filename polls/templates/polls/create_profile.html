@@ -1,0 +1,30 @@
+{% extends 'polls/base.html' %}
+
+{% load bootstrap3 %}
+{% load bootstrap %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+{% block title %}{{ user }} Profile | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row">
+		<div style="margin: auto;" class="col-sm-6 col-sm-offset-3" class="form-group">
+			{% if messages %}
+			{% bootstrap_javascript jquery=1 %}
+			{% bootstrap_messages %}
+			{% endif %}
+			<form method="POST" action="{% url 'polls:create_profile' %}" class="form">
+			{{ form|bootstrap }}
+			{% csrf_token %}
+			<input type="submit" value="Create" class="btn btn-success"> 
+			</form>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,217 @@
+{% load polls_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>{% block title %}{% endblock %} Nigeria Online Polls</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- bootstrap cdn -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+	<!-- Custom Fonts -->
+  <link href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
+
+  <!-- Google fonts - Open Sans-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="{% static 'css/green.css' %}">
+    
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="favicon.png">
+</head>
+<body style="background-color: #e5ffe5 !important;">
+	<header class="header">
+      <!-- Main Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand --><a href="index.html" class="navbar-left"><img src="{% static 'img/pollit_logo.png' %}" width="50"></a>
+      </nav>
+    </header>
+
+<div style="margin-bottom: 50px; margin-top: 50px;" class="container">
+	<div class="row">
+		<div style="padding: 20px;" class="col-md-6">
+			<div style="margin-bottom: 50px;">
+				<h1>{{ poll.question }}</h1>
+			</div>
+			<div>
+				<canvas id="myChart" width="300" height="200"></canvas>
+			</div>
+			<div style="margin-top: 50px;">
+				{% for choice in choices %}
+				<ul>
+    				<li style="margin-bottom: 10px;" class="btn btn-outline-success btn-lg">{{ choice.choice_text }} -- <b>{{ choice.profile.count|retired_percentage:choice.id }}%</b>
+    				</li>
+				</ul>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 20px;">
+				<h3 style="margin: 10px;">Filter Votes </h3>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Sex</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_male' poll.id %}">Male</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_female' poll.id %}">Female</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Age</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_18_24' poll.id %}">18-24</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_25_34' poll.id %}">25-34</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_35_44' poll.id %}">35-44</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_45_54' poll.id %}">45-54</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_55_64' poll.id %}">55-64</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_age_65_' poll.id %}">65+</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Ethnicity</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_hausa_fulani' poll.id %}">Hausa/Fulani</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_igbo' poll.id %}">Igbo</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_yoruba' poll.id %}">Yoruba</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_minority_south_south' poll.id %}">Minority SS</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_minority_north_central' poll.id %}">Minority NC</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_minority_north_east' poll.id %}">Minority NE</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Residence</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_north_west' poll.id %}">North West</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_north_east' poll.id %}">North East</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_north_central' poll.id %}">North Central</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_south_west' poll.id %}">South West</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_south_east' poll.id %}">South East</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_south_south' poll.id %}">South South</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_diaspora' poll.id %}">Diaspora</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Education</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_less_secondary' poll.id %}">Below Secondary</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_secondary' poll.id %}">Secondary</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_graduate' poll.id %}">Graduate</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_postgraduate' poll.id %}">Postgraduate</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Employment</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_currently_unemployed' poll.id %}">Currently unemployed</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_employed_full_time' poll.id %}">Employed full time</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_employed_part_time' poll.id %}">Employed part time</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_self_employed' poll.id %}">Self employed</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_student' poll.id %}">Student</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success active btn-sm" href="{% url 'polls:result_retired' poll.id %}">Retired</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Income</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_less_18000' poll.id %}">below 18,000</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_18000_50000' poll.id %}">18,000-50,000</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_51000_100000' poll.id %}">51,000-100,000</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_101000_200000' poll.id %}">101,000-200,000</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_201000_500000' poll.id %}">201,000-500,000</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_500000' poll.id %}">500,000+</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Marital Status</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_single_never_married' poll.id %}">Single never married</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_divorced_separated' poll.id %}">Divorced or Separated</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_married' poll.id %}">Married</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_widowed' poll.id %}">Widowed</a></li>
+				</ul>
+				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Religion</p>
+				<ul style="margin-top: 5px;" class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_christianity' poll.id %}">Christianity</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_islam' poll.id %}">Islam</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_other_religion' poll.id %}">Others</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+ <footer style="background-color: #ffffff !important;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+<!--jquery cdn-->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: [{% for choice in choices %}'{{ choice.choice_text }}', {% endfor %}],
+        datasets: [{
+            label: '# of Votes',
+            data: [{% for choice in choices %} {{ choice.profile.count|retired_votes:choice.id }}, {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+</body>
+</html>

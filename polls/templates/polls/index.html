@@ -1,0 +1,44 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 50px;" class="container">
+	<div style="margin-top: 50px; margin-bottom: 20px;" class="row">
+		<div class="col-lg-12">
+		<h1>Let Your Voice Be Heard!</h1>
+		</div>
+		<div class="col-lg-12">
+		<p>You must <a href="{% url 'login' %}">Login</a> and create a profile to be able to vote and view results</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			{% for poll in polls %}
+			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 30px; margin-bottom: 50px;">
+				<h3 style="margin-bottom: 10px;">{{ poll.question }}</h3>
+				<small>
+					<ul style="margin-bottom: 30px;" class="list-inline">
+						<li class="list-inline-item"><i class="fa fa-calendar" aria-hidden="true"></i> {{ poll.date }}</li>
+						<li style="margin-left: 5px;" class="list-inline-item"><i class="fa fa-user" aria-hidden="true"></i> Respondents: {{ poll.profile.count }}</li>
+					</ul>
+				</small>
+				<p style="margin-bottom: 30px;">{{ poll.description }}</p>
+				<ul class="list-inline">
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" role="button" href="{% url 'polls:result_all' poll.id %}">Result</a></li>
+					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" role="button" href="{% url 'polls:detail' poll.id %}">Vote</a></li>
+				</ul>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="col-md-4">
+			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 20px;">
+				<h3 style="margin: 10px; text-align: center;">About</h3>
+				{% load static %}
+				<img style="margin:auto;" src="{% static 'img/pollit_logo.png' %}" width="300">
+				<p>You can capture any type of data you want with online surveys. But did you know that you can also have some seasonal fun by creating and circulating a Christmas Quiz for all your friends and colleagues to take part in? In the build-up to the big day, why not get everybody in the mood for the holidays by taking part in a bit of festive merriment?
+				You can capture any type of data you want with online surveys. But did you know that you can also have some seasonal fun by creating and circulating a Christmas Quiz for all your friends and colleagues to take part in? In the build-up to the big day, why not get everybody in the mood for the holidays by taking part in a bit of festive merriment?</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

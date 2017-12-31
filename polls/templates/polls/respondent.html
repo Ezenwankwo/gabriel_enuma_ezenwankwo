@@ -1,0 +1,418 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>{% block title %}{% endblock %} Nigeria Online Polls</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- bootstrap cdn -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+	<!-- Custom Fonts -->
+  <link href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
+
+  <!-- Google fonts - Open Sans-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="{% static 'css/green.css' %}">
+    
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="favicon.png">
+</head>
+<body style="background-color: #e5ffe5 !important;">
+	<header class="header">
+      <!-- Main Navbar-->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <!-- Navbar Brand -->
+          <div class="navbar-header d-flex align-items-center justify-content-between">
+            <!-- Navbar Brand --><a href="index.html" class="navbar-left"><img src="{% static 'img/pollit_logo.png' %}" width="50"></a>
+      </nav>
+    </header>
+    <!-- Hero Section-->
+	<div class="container">
+		<div class="row">
+        <h3>Respondents</h3>
+        <p class="lead">{{ poll.question }}</p>
+    </div>
+    <div style="margin: 20px;" class="row">
+        <div class="col-md-6">
+          <div style="margin-bottom: 20px;"><canvas id="mySexChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myAgeChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myEthnicityChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myResidenceChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myEducationChart" width="200" height="200"></canvas></div>
+        </div>
+        <div class="col-md-6">
+          <div style="margin-bottom: 20px;"><canvas id="myEmploymentChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myIncomeChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myMaritalChart" width="200" height="200"></canvas></div>
+          <div style="margin-bottom: 20px;"><canvas id="myReligionChart" width="200" height="200"></canvas></div>
+        </div>
+    </div>
+	</div>
+	<!-- Footer -->
+    <footer style="background-color: #ffffff !important;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+<!--jquery cdn-->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<script src="{% static 'js/Chart.min.js' %}"></script>
+
+<script>
+   new Chart(document.getElementById("mySexChart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Male", "Female"],
+      datasets: [{
+        label: "Religion",
+        backgroundColor: ["#3e95cd", "#8e5ea2"],
+        data: [{{ male_num }}, {{ female_num }}]
+      }]
+    },
+     options: {
+      title: {
+        display: true,
+        text: 'Sex'
+      }
+    }
+});    
+</script>
+<script>
+var ctx = document.getElementById("myAgeChart").getContext('2d');
+var myAgeChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
+        datasets: [{
+            label: '# Age',
+            data: [{{ 18_24_num }}, {{ 25_34_num }}, {{ 35_44_num }}, {{ 45_54_num }}, {{ 55_64_num }}, {{ 65_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myEthnicityChart").getContext('2d');
+var myEthnicityChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Hausa/Fulani", "Igbo", "Yoruba", "Minority-SS", "Minority-NC", "Minority-NE"],
+        datasets: [{
+            label: '# Ethnicity',
+            data: [{{ hausa_fulani_num }}, {{ igbo_num }}, {{ yoruba_num }}, {{ minority_SS_num }}, {{ minority_NC_num }}, {{ minority_NE_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myResidenceChart").getContext('2d');
+var myResidenceChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["North West", "North East", "North Central", "South West", "South East", "South South", "Diaspora"],
+        datasets: [{
+            label: '# Residence',
+            data: [{{ north_west_num }}, {{ north_east_num }}, {{ north_central_num }}, {{ south_west_num }}, {{ south_east_num }}, {{ south_south_num }}, {{ diaspora_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(150, 150, 150, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(150, 150, 150, 0.1)'
+
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myEducationChart").getContext('2d');
+var myEthnicityChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Below Secondary", "Secondary", "Graduate", "Postgraduate"],
+        datasets: [{
+            label: '# Education',
+            data: [{{ less_secondary_num }}, {{ secondary_num }}, {{ graduate_num }}, {{ postgraduate_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myEmploymentChart").getContext('2d');
+var myEmploymentChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Currently unemployed", "Employed full time", "Employed part time", "Self employed", "Student", "Retired"],
+        datasets: [{
+            label: '# Employment',
+            data: [{{ currently_unemployed_num }}, {{ employed_full_time_num }}, {{ employed_part_time_num }}, {{ self_employed_num }}, {{ student_num }}, {{ retired_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myIncomeChart").getContext('2d');
+var myIncomeChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Currently unemployed", "Employed full time", "Employed part time", "Self employed", "Student", "Retired"],
+        datasets: [{
+            label: '# Income',
+            data: [{{ less_18000_num }}, {{ 18000_51000_num }}, {{ 51000_100000_num }}, {{ 101000_200000_num }}, {{ 201000_500000_num }}, {{ 500000_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+var ctx = document.getElementById("myMaritalChart").getContext('2d');
+var myIncomeChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: ["Single-never married", "Divorced or Separated", "Married", "Widowed"],
+        datasets: [{
+            label: '# Marital Status',
+            data: [{{ single_never_married_num }}, {{ divorced_separated_num }}, {{ married_num }}, {{ widowed_num }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
+  new Chart(document.getElementById("myReligionChart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Christianity", "Islam", "Others"],
+      datasets: [{
+        label: "Religion",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+        data: [{{ christianity_num }}, {{ islam_num }}, {{ other_religion_num }}]
+      }]
+    },
+     options: {
+      title: {
+        display: true,
+        text: 'Religion'
+      }
+    }
+});
+</script>
+</body>
+</html>
