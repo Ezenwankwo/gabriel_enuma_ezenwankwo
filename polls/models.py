@@ -90,6 +90,9 @@ class Profile(models.Model):
     )
 
     religion = models.CharField(max_length=20, choices=religion, blank=False)
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
     
 
     @receiver(post_save, sender=user)
