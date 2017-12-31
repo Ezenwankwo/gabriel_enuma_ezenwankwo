@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils.translation import gettext as _
-from django.db.models.manager import Manager
 
 # Create your models here.
 
@@ -105,21 +103,12 @@ class Profile(models.Model):
         instance.profile.save()
 
 
-class PublishedManager(Manager):
-    def get_query_set(self):
-        return super(PublishedManager, self).get_query_set().filter(is_published=True)
-
-
 class Poll(models.Model):
     question = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     user = models.ManyToManyField(User)
     profile = models.ManyToManyField(Profile)
     created = models.DateField(auto_now=True)
-    is_published = models.BooleanField(default=True, verbose_name=_('is published'))
-
-    objects = models.Manager()
-    published = PublishedManager()
 
     def __str__(self):
         return self.question
