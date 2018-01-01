@@ -24,6 +24,14 @@
   <link rel="shortcut icon" href="favicon.png">
 </head>
 <body style="background-color: #e5ffe5 !important;">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<header class="header">
       <!-- Main Navbar-->
       <nav class="navbar navbar-expand-lg">
@@ -31,7 +39,10 @@
           <!-- Navbar Brand -->
           <div class="navbar-header d-flex align-items-center justify-content-between">
             <!-- Navbar Brand --><a href="{% url 'polls:index' %} class="navbar-left"><img src="{% static 'img/pollit_logo.png' %}" width="50"></a>
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button navbar-right" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <ul class="list-inline pull-right">
+              <li class="list-inline-item"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+              <li class="list-inline-item"><div class="fb-share-button" data-href="http://pollitnigeria.com" data-layout="button_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpollitnigeria.com%2F&amp;src=sdkpreparse">Share</a></div></li>
+            </ul>
       </nav>
     </header>
     <!-- Hero Section-->
