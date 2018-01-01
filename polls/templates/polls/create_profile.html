@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="row">
-		<div style="margin: auto;" class="col-sm-6 col-sm-offset-3" class="form-group">
+		<div class="col-md-8" class="form-group">
 			{% if messages %}
 			{% bootstrap_javascript jquery=1 %}
 			{% bootstrap_messages %}
@@ -26,5 +26,13 @@
 			<input type="submit" value="Create" class="btn btn-success"> 
 			</form>
 		</div>
-	</div>
+		<div class="col-md-4">
+			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 20px;">
+				<h3 style="margin: 10px; text-align: center;">About</h3>
+				{% load static %}
+				<img style="margin:auto;" src="{% static 'img/pollit_logo.png' %}" width="200">
+				<p>Pollit Nigeria conducts online opinion polls on relevant and critical national issues. Our goal is to ensure the voice of regular Nigerians gets heard. Our polls application allows you to both filter votes by respondents characteristics and also view the demography of respondents for every poll. The future of polling is online, and our methodology represents the best approach yet. </p>
+			</div>
+		</div>
+</div>
 {% endblock %}

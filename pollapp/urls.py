@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from polls import urls as polls_url
+from polls.views import IndexView
 
 
 urlpatterns = [
 	url(r'^polls/', include(polls_url)),
-    url(r'^signup/', TemplateView.as_view(template_name='registration/signup.html')),
+    url(r'^$', IndexView.as_view(), name='home'),
 	url(r'^login/$', auth_views.login, name='login'),
 	url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
