@@ -31,7 +31,7 @@
         <div class="container">
           <!-- Navbar Brand -->
           <div class="navbar-header d-flex align-items-center justify-content-between">
-            <!-- Navbar Brand --><a href="index.html" class="navbar-left"><img src="{% static 'img/pollit_logo.png' %}" width="50"></a>
+            <!-- Navbar Brand --><a href="{% url 'home' %}" class="navbar-left"><img src="{% static 'img/pollit_logo.png' %}" width="50"></a>
       </nav>
     </header>
 
@@ -56,7 +56,7 @@
 		<div class="col-md-6">
 			<div style="background-color: #ffffff; border: 1px solid green; border-radius: 5px; padding: 20px;">
 				<h3 style="margin: 20px;">Filter Votes </h3>
-				<p class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_male' poll.id %}">All</a></p>
+				<p class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_all' poll.id %}">All</a></p>
 				<p style="margin-bottom: 0; margin-top: 10px; border-bottom: 1px solid green">Sex</p>
 				<ul style="margin-top: 5px;" class="list-inline">
 					<li class="list-inline-item"><a class="btn btn-outline-success btn-sm" href="{% url 'polls:result_male' poll.id %}">Male</a></li>
