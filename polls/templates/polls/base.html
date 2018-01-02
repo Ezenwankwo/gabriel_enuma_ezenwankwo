@@ -2,6 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-79912254-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-79912254-2');
+</script>
+
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>{% block title %}{% endblock %} Nigeria Online Polls</title>
@@ -24,27 +34,6 @@
   <link rel="shortcut icon" href="favicon.png">
 </head>
 <body style="background-color: #e5ffe5 !important;">
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{220587305151635}',
-      cookie     : true,
-      xfbml      : true,
-      version    : '{v2.11}'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 	<header class="header">
       <!-- Main Navbar-->
       <nav class="navbar navbar-expand-lg">
