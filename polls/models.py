@@ -97,6 +97,9 @@ class Profile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
+    
+    def __str__(self):
+        return self.user.username
 
     @receiver(post_save, sender=user)
     def save_user_profile(sender, instance, **kwargs):
@@ -108,6 +111,12 @@ class Poll(models.Model):
     description = models.CharField(max_length=500)
     user = models.ManyToManyField(User)
     profile = models.ManyToManyField(Profile)
+    status = (
+        ('Open', 'Open'),
+        ('Closed', 'Closed'),
+    )
+
+    status = models.CharField(max_length=7, choices=status, blank=False)
     created = models.DateField(auto_now=True)
 
     def __str__(self):

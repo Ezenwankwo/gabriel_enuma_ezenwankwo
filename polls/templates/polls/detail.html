@@ -1,7 +1,7 @@
 {% extends 'polls/base.html' %}
 
 {% block content %}
-<div style="margin-bottom: 50px; margin-top: 50px;" class="row">
+<div style="margin-bottom: 100px; margin-top: 50px;" class="row">
 	{% if not user.profile %}
 	<p>You must <a href="{% url 'polls:create_profile' %}">create</a> a profile to vote</p>
 	{% endif %}
