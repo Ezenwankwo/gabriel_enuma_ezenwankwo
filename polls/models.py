@@ -111,12 +111,6 @@ class Poll(models.Model):
     description = models.CharField(max_length=500)
     user = models.ManyToManyField(User)
     profile = models.ManyToManyField(Profile)
-    status = (
-        ('Open', 'Open'),
-        ('Closed', 'Closed'),
-    )
-
-    status = models.CharField(max_length=7, choices=status, blank=False)
     created = models.DateField(auto_now=True)
 
     def __str__(self):
