@@ -8,7 +8,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.generic import View, CreateView, ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -40,7 +39,7 @@ class IndexView(ListView):
     context_object_name = 'polls'
 
 
-class DetailView(LoginRequiredMixin, DetailView):
+class DetailView(DetailView):
 
     model = Poll
     template_name = 'polls/detail.html'
