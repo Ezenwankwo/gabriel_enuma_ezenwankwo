@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import ValidationError
@@ -8,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.views.generic import View, CreateView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -39,7 +39,7 @@ class IndexView(ListView):
     context_object_name = 'polls'
 
 
-class DetailView(DetailView):
+class DetailView(LoginRequiredMixin, DetailView):
 
     model = Poll
     template_name = 'polls/detail.html'
@@ -316,7 +316,7 @@ def result_other_religion(request, poll_id):
     choices = p.choice_set.all()
     return render(request, 'polls/other_religion.html', {'choices': choices, 'poll': p})
 
-@login_required
+
 def vote(request, poll_id):
     p = get_object_or_404(Poll, pk=poll_id)
 
