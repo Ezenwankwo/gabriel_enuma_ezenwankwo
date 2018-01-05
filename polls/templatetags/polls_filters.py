@@ -405,7 +405,7 @@ def currently_unemployed_percentage(value, arg):
 		return round(percentage)
 
 #filters for employed full time votes
-@register.filter(name='empolyed_full_time_votes')
+@register.filter(name='employed_full_time_votes')
 def employed_full_time_votes(value, arg):
 	profile_num = Profile.objects.filter(employment__iexact='Employed full time').filter(choice__id=arg).count()
 	return profile_num
