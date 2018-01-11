@@ -108,7 +108,7 @@ class Profile(models.Model):
 
 class Poll(models.Model):
     question = models.CharField(max_length=200)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     user = models.ManyToManyField(User)
     profile = models.ManyToManyField(Profile)
     created = models.DateField(auto_now_add=True)
