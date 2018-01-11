@@ -39,7 +39,7 @@
 	<div class="row">
 		<div style="padding: 20px;" class="col-md-6">
 			<div style="margin-bottom: 50px;">
-				<h1>{{ poll.question }}</h1>
+				<h3>{{ poll.question }}</h3>
 			</div>
 			<div>
 				<canvas id="myChart" width="300" height="200"></canvas>
@@ -47,7 +47,7 @@
 			<div style="margin-top: 50px;">
 				{% for choice in choices %}
 				<ul>
-    				<li style="margin-bottom: 10px;" class="btn btn-outline-success btn-lg">{{ choice.choice_text }} -- <b>{{ choice.profile.count|employed_full_time_percentage:choice.id }}%</b>
+    				<li style="margin-bottom: 10px;" class="btn btn-outline-success btn-sm">{{ choice.choice_text }} -- <b>{{ choice.profile.count|employed_full_time_percentage:choice.id }}%</b>
     				</li>
 				</ul>
 				{% endfor %}
