@@ -111,7 +111,7 @@ class Poll(models.Model):
     description = models.CharField(max_length=500)
     user = models.ManyToManyField(User)
     profile = models.ManyToManyField(Profile)
-    created = models.DateField(auto_now=True)
+    created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.question
