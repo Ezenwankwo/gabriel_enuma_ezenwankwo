@@ -57,7 +57,7 @@
 			<div style="margin-top: 50px;">
 				{% for choice in choices %}
 				<ul>
-    				<li style="margin-bottom: 10px;" class="btn btn-outline-success btn-lg">{{ choice.choice_text }} -- <b>{{ choice.profile.count|result_percentage:choice.id }}%</b>
+    				<li style="margin-bottom: 10px;" class="btn btn-outline-success btn-sm">{{ choice.choice_text }} -- <b>{{ choice.profile.count|result_percentage:choice.id }}%</b>
     				</li>
 				</ul>
 				{% endfor %}
